@@ -9,16 +9,15 @@ app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
-    allow_credentials=True,
     allow_methods=["GET"],
     allow_headers=["*"],
 )
 
-# Load CSV once at startup
+# Load CSV once
 students = []
 
-with open("q-fastapi.csv", newline="") as csvfile:
-    reader = csv.DictReader(csvfile)
+with open("q-fastapi.csv", newline="") as file:
+    reader = csv.DictReader(file)
     for row in reader:
         students.append({
             "studentId": int(row["studentId"]),
